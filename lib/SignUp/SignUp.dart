@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:login/routes/AppRoutes.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});

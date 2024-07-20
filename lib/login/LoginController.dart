@@ -1,15 +1,14 @@
-
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:login/login/AuthService.dart';
 import 'package:login/routes/AppRoutes.dart';
 
 class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final AuthService authService = AuthService();
   var isLoading = false.obs;
   var isPasswordVisible = false.obs;
 
@@ -17,28 +16,17 @@ class LoginController extends GetxController {
     if (formKey.currentState!.validate()) {
       isLoading.value = true;
 
-      final url = Uri.parse('https://dummyjson.com/auth/login');
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'username': usernameController.text,
-          'password': passwordController.text,
-        }),
+      final data = await authService.login(
+        usernameController.text,
+        passwordController.text,
       );
 
       isLoading.value = false;
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data['message'] == null) {
-          Get.toNamed(AppRoutes.tutor);
-        } else {
-          _showErrorDialog(data['message']);
-        }
+      if (data['message'] == null) {
+        Get.toNamed(AppRoutes.tutor);
       } else {
-        final data = jsonDecode(response.body);
-        _showErrorDialog(data['message'] ?? 'Login failed');
+        _showErrorDialog(data['message']);
       }
     } else {
       if (kDebugMode) {
