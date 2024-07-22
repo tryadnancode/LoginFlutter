@@ -2,8 +2,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/login/LoginController.dart';
-import 'package:login/routes/AppRoutes.dart';
+import 'package:login/module/view/login/login_controller.dart';
+import 'package:login/routes/app_routes.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
                   width: 100,
                   height: 100,
                   margin: const EdgeInsets.all(50),
-                  child: Image.asset("lib/assets/images/img.png"),
+                  child: Image.asset("assets/images/img.png"),
                 ),
                 TextFormField(
                   controller: _loginController.usernameController,

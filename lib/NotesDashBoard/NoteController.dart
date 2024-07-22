@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:login/AuthRepoTask.dart';
-import 'package:login/ResponseData.dart';
+import 'package:login/api/auth_repo_task.dart';
+import 'package:login/module/auth/data/response_data.dart';
 
 class NoteController extends GetxController {
   var allTasks = <ResponseData>[].obs;

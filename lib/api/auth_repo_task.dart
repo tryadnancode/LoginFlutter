@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:login/ResponseData.dart';
+import 'package:login/module/auth/data/response_data.dart';
+
 
 
 class AuthRepoTask {

@@ -27,7 +27,7 @@ class SignUp extends StatelessWidget {
           SizedBox(
               height: 200,
               width: double.infinity,
-              child: Image.asset("lib/assets/images/img_1.png")),
+              child: Image.asset("assets/images/img_2.png")),
           Expanded(
               child: Container(
                   padding: const EdgeInsets.only(

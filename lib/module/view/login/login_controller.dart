@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/login/AuthService.dart';
-import 'package:login/routes/AppRoutes.dart';
+import 'package:login/module/view/login/auth_service.dart';
+import 'package:login/routes/app_routes.dart';
 
 class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -24,7 +24,7 @@ class LoginController extends GetxController {
       isLoading.value = false;
 
       if (data['message'] == null) {
-        Get.toNamed(AppRoutes.tutor);
+        Get.toNamed(AppRoutes.overView);
       } else {
         _showErrorDialog(data['message']);
       }

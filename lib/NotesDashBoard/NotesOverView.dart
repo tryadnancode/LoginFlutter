@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/NoteCard.dart';
+
 import 'package:login/NotesDashBoard/NoteController.dart';
-import 'package:login/routes/AppRoutes.dart';
+import 'package:login/routes/app_routes.dart';
+import 'package:login/widgets/NoteCard.dart';
 
 class NotesOverView extends StatelessWidget {
   const NotesOverView({super.key});
@@ -17,23 +18,23 @@ class NotesOverView extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              const Row(
+              const Stack(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: CircleAvatar(
+                    CircleAvatar(
                         radius: 30,
                         backgroundImage:
-                            AssetImage('lib/assets/images/img.png')),
-                  ),
-                  Expanded(
-                      child: Center(
-                    child: Text(
-                      "My Notes",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                            AssetImage('assets/images/img.png')),
+                  Align(
+                      alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "My Notes",
+                        style:
+                            TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  )),
+                  ),
                 ],
               ),
               Container(
