@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:login/NotesDashBoard/NoteController.dart';
 import 'package:login/routes/app_routes.dart';
-import 'package:login/widgets/NoteCard.dart';
+import 'package:login/screens/dashBoard/dialog/create_dialog.dart';
+import 'package:login/screens/dashBoard/view/note_controller.dart';
+import 'package:login/widgets/note_card.dart';
 
 class NotesOverView extends StatelessWidget {
   const NotesOverView({super.key});
@@ -13,28 +13,33 @@ class NotesOverView extends StatelessWidget {
     final NoteController taskController = Get.put(NoteController());
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xfff3eae3),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         body: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              const Stack(
+              Stack(
                 children: [
-                    CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            AssetImage('assets/images/img.png')),
-                  Align(
-                      alignment: Alignment.center,
+                  const CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage('assets/images/img.png')),
+                  const Align(
+                    alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         "My Notes",
-                        style:
-                            TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.logout)),
+                  )
                 ],
               ),
               Container(
@@ -61,7 +66,7 @@ class NotesOverView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "All Task",
+                            "All Notes",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -78,7 +83,8 @@ class NotesOverView extends StatelessWidget {
                               final task = taskController.allTasks[index];
                               return InkWell(
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.details,arguments: task);
+                                  Get.toNamed(AppRoutes.details,
+                                      arguments: task);
                                 },
                                 child: NoteCard(task: task),
                               );
@@ -86,7 +92,7 @@ class NotesOverView extends StatelessWidget {
                           ),
                           const Padding(
                             padding: EdgeInsets.only(top: 20),
-                            child: Text("Completed Task",
+                            child: Text("Completed Notes",
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold)),
                           ),
@@ -103,7 +109,8 @@ class NotesOverView extends StatelessWidget {
                               final task = taskController.completedTasks[index];
                               return InkWell(
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.details,arguments: task);
+                                  Get.toNamed(AppRoutes.details,
+                                      arguments: task);
                                 },
                                 child: NoteCard(task: task),
                               );
@@ -111,7 +118,7 @@ class NotesOverView extends StatelessWidget {
                           ),
                           const Padding(
                             padding: EdgeInsets.only(top: 20),
-                            child: Text("Pinned Task",
+                            child: Text("Pinned Notes",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -130,7 +137,8 @@ class NotesOverView extends StatelessWidget {
                               final task = taskController.pendingTasks[index];
                               return InkWell(
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.details,arguments: task);
+                                  Get.toNamed(AppRoutes.details,
+                                      arguments: task);
                                 },
                                 child: NoteCard(task: task),
                               );
@@ -145,6 +153,21 @@ class NotesOverView extends StatelessWidget {
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Get.dialog(CreateNotesDialog());
+          },
+          label: const Text(
+            "Add new notes",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          icon: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.black,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }

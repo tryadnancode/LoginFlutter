@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:login/module/auth/data/response_data.dart';
+import 'package:login/screens/login/data/response_data.dart';
 
 class NoteCard extends StatelessWidget {
   final ResponseData task;
@@ -33,21 +32,21 @@ class NoteCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             task.description.toString(),
-            style: const TextStyle(color: Colors.white, fontSize: 16),
+            style: const TextStyle(color: Colors.white, fontSize: 14),
           ),
           const SizedBox(height: 8),
           const Row(
             children: [
               Text(
                 "yesterday",
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: TextStyle(color: Colors.white, fontSize: 12),
               ),
               SizedBox(width: 8),
               Text(
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 '12 pm',
-                style: TextStyle(color: Colors.blue, fontSize: 16),
+                style: TextStyle(color: Colors.blue, fontSize: 14),
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:login/api/auth_repo_task.dart';
-import 'package:login/module/auth/data/response_data.dart';
+import 'package:login/screens/login/data/response_data.dart';
+
 
 class NoteController extends GetxController {
   var allTasks = <ResponseData>[].obs;
@@ -27,6 +28,14 @@ class NoteController extends GetxController {
           .assignAll(tasks.where((task) => task.pinned ?? false).toList());
     } finally {
       isLoading(false);
+    }
+  }
+  void createTask(String title, String description) async {
+    try {
+      await AuthRepoTask.createTask(title, description);
+      fetchTasks();
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to create task');
     }
   }
 }

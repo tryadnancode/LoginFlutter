@@ -1,9 +1,8 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/module/view/login/login_controller.dart';
 import 'package:login/routes/app_routes.dart';
+import 'package:login/screens/login/view/login_controller.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
