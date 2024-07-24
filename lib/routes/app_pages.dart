@@ -13,7 +13,7 @@ class AppPages{
     ),
     GetPage(name: AppRoutes.signup, page: ()=> const SignUp(),
     ),
-    GetPage(name: AppRoutes.overView, page: ()=> const NotesOverView(),
+    GetPage(name: AppRoutes.overView, page: ()=> NotesOverView(),
     ),
     GetPage(name: AppRoutes.details, page: ()=> NotesDetails(),
     )

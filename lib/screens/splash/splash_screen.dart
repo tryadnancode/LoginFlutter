@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/routes/app_routes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../routes/app_routes.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _navigateToLogin();
-  }
-
-  _navigateToLogin() async {
-    await Future.delayed(const Duration(seconds: 3), () {});
-    Get.offNamed(AppRoutes.login);
+  Future<void> checkLoginStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final username = prefs.getString('username');
+    if (token != null && username != null) {
+      Get.offAllNamed(AppRoutes.overView);
+    } else {
+      Get.offAllNamed(AppRoutes.login);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    checkLoginStatus();
     return const Scaffold(
       body: Center(
         child: Column(

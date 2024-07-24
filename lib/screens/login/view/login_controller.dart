@@ -1,8 +1,11 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login/routes/app_routes.dart';
 import 'package:login/screens/dashBoard/Data/auth_service.dart';
+import 'package:login/screens/login/data/login_response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -11,6 +14,9 @@ class LoginController extends GetxController {
   final AuthService authService = AuthService();
   var isLoading = false.obs;
   var isPasswordVisible = false.obs;
+  var loginResponse = LoginResponse(token: '', email: '').obs;
+  var isLoggedIn = false.obs;
+  static LoginController get to => Get.find();
 
   Future<void> login() async {
     if (formKey.currentState!.validate()) {
@@ -35,6 +41,32 @@ class LoginController extends GetxController {
     }
   }
 
+  void saveLoginData(LoginResponse response) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', response.token ?? '');
+    await prefs.setString('username', response.email ?? '');
+    isLoggedIn(true);
+  }
+
+  Future<void> checkLoginStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final username = prefs.getString('username');
+    if (token != null && username != null) {
+      loginResponse.value = LoginResponse(token: token, email: username);
+      isLoggedIn(true);
+      Get.offAllNamed(AppRoutes.overView);
+    } else {
+      Get.offAllNamed(AppRoutes.login);
+    }
+  }
+
+  void logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    isLoggedIn(false);
+    Get.offAllNamed(AppRoutes.login);
+  }
   void _showErrorDialog(String message) {
     Get.dialog(
       AlertDialog(
@@ -66,4 +98,11 @@ class LoginController extends GetxController {
     }
     return null;
   }
+
+  // @override
+  // void onClose() {
+  //   usernameController.dispose();
+  //   passwordController.dispose();
+  //   super.onClose();
+  // }
 }

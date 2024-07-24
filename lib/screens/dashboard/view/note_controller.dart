@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:login/api/auth_repo_task.dart';
-import 'package:login/screens/login/data/response_data.dart';
+import 'package:login/screens/dashboard/Data/response_data.dart';
 
 
 class NoteController extends GetxController {

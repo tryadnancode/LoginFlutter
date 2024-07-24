@@ -3,17 +3,19 @@ import 'package:get/get.dart';
 import 'package:login/routes/app_routes.dart';
 import 'package:login/screens/dashBoard/dialog/create_dialog.dart';
 import 'package:login/screens/dashBoard/view/note_controller.dart';
+import 'package:login/screens/login/view/login_controller.dart';
 import 'package:login/widgets/note_card.dart';
 
 class NotesOverView extends StatelessWidget {
-  const NotesOverView({super.key});
+   NotesOverView({super.key});
+  final LoginController loginController =Get.find();
 
   @override
   Widget build(BuildContext context) {
     final NoteController taskController = Get.put(NoteController());
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -23,7 +25,7 @@ class NotesOverView extends StatelessWidget {
                   const CircleAvatar(
                       radius: 30,
                       backgroundImage: AssetImage('assets/images/img.png')),
-                  const Align(
+                   const Align(
                     alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
@@ -37,7 +39,9 @@ class NotesOverView extends StatelessWidget {
                   Align(
                     alignment: Alignment.topRight,
                     child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          loginController.logout();
+                        },
                         icon: const Icon(Icons.logout)),
                   )
                 ],

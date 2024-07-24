@@ -5,12 +5,13 @@ import 'package:login/routes/app_routes.dart';
 import 'package:login/screens/login/view/login_controller.dart';
 
 class Login extends StatelessWidget {
-  Login({super.key});
-
+   Login({super.key});
   final LoginController _loginController = Get.put(LoginController());
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login as Student"),
@@ -90,8 +91,8 @@ class Login extends StatelessWidget {
                           : _loginController.login,
                       child: _loginController.isLoading.value
                           ? const CircularProgressIndicator(
-                        valueColor:
-                        AlwaysStoppedAnimation<Color>(Colors.black),
+
+
                       )
                           : const Text(
                         "Login",

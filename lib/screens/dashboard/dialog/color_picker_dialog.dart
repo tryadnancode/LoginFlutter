@@ -22,11 +22,11 @@ class _ColorPickerDialogContentState extends State<ColorPickerDialogContent> {
         children: <Widget>[
           const Text(
             'Select Note Color',
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 10),
           Wrap(
-            spacing: 10.0,
+            spacing: 10,
             runSpacing: 10,
             children: <Color>[
               Colors.green,
