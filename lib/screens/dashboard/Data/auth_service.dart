@@ -1,10 +1,14 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
+import '../../login/data/login_response.dart';
 
 class AuthService {
   final String baseUrl = 'https://dummyjson.com';
 
-  Future<Map<String, dynamic>> login(String username, String password) async {
+  void userLogin(String username, String password,
+      Function(LoginResponse?, String?) callback) async {
     final url = Uri.parse('$baseUrl/auth/login');
     final response = await http.post(
       url,
@@ -14,13 +18,11 @@ class AuthService {
         'password': password,
       }),
     );
-
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      callback.call(LoginResponse.fromJson(jsonDecode(response.body)), null);
     } else {
-      return {
-        'message': jsonDecode(response.body)['message'] ?? 'Login failed'
-      };
+      callback.call(
+          null, jsonDecode(response.body)['message'] ?? 'Login failed');
     }
   }
 }

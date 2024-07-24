@@ -8,12 +8,12 @@ class SplashScreen extends StatelessWidget {
 
   Future<void> checkLoginStatus() async {
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
+    final token =  prefs.getString('token');
     final username = prefs.getString('username');
     if (token != null && username != null) {
-      Get.offAllNamed(AppRoutes.overView);
+      Get.offAndToNamed(AppRoutes.overView);
     } else {
-      Get.offAllNamed(AppRoutes.login);
+      Get.offAndToNamed(AppRoutes.login);
     }
   }
 

@@ -8,8 +8,6 @@ import 'package:login/widgets/note_card.dart';
 
 class NotesOverView extends StatelessWidget {
    NotesOverView({super.key});
-  final LoginController loginController =Get.find();
-
   @override
   Widget build(BuildContext context) {
     final NoteController taskController = Get.put(NoteController());
@@ -40,7 +38,7 @@ class NotesOverView extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: IconButton(
                         onPressed: () {
-                          loginController.logout();
+                          taskController.logout();
                         },
                         icon: const Icon(Icons.logout)),
                   )

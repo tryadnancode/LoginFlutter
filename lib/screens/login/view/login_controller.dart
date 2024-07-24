@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,25 +14,22 @@ class LoginController extends GetxController {
   var isLoading = false.obs;
   var isPasswordVisible = false.obs;
   var loginResponse = LoginResponse(token: '', email: '').obs;
-  var isLoggedIn = false.obs;
+
+
   static LoginController get to => Get.find();
 
   Future<void> login() async {
     if (formKey.currentState!.validate()) {
       isLoading.value = true;
-
-      final data = await authService.login(
-        usernameController.text,
-        passwordController.text,
-      );
-
-      isLoading.value = false;
-
-      if (data['message'] == null) {
-        Get.toNamed(AppRoutes.overView);
-      } else {
-        _showErrorDialog(data['message']);
-      }
+        authService.userLogin(usernameController.text, passwordController.text,
+          (data, error) {
+        isLoading.value = false;
+        if (error == null) {
+          saveLoginData(data!!);
+        } else {
+          _showErrorDialog(error!!);
+        }
+      });
     } else {
       if (kDebugMode) {
         print("Validation failed");
@@ -45,7 +41,8 @@ class LoginController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', response.token ?? '');
     await prefs.setString('username', response.email ?? '');
-    isLoggedIn(true);
+    Get.offAndToNamed(AppRoutes.overView);
+
   }
 
   Future<void> checkLoginStatus() async {
@@ -54,19 +51,14 @@ class LoginController extends GetxController {
     final username = prefs.getString('username');
     if (token != null && username != null) {
       loginResponse.value = LoginResponse(token: token, email: username);
-      isLoggedIn(true);
       Get.offAllNamed(AppRoutes.overView);
     } else {
       Get.offAllNamed(AppRoutes.login);
     }
   }
 
-  void logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    isLoggedIn(false);
-    Get.offAllNamed(AppRoutes.login);
-  }
+
+
   void _showErrorDialog(String message) {
     Get.dialog(
       AlertDialog(
@@ -99,10 +91,10 @@ class LoginController extends GetxController {
     return null;
   }
 
-  // @override
-  // void onClose() {
-  //   usernameController.dispose();
-  //   passwordController.dispose();
-  //   super.onClose();
-  // }
+// @override
+// void onClose() {
+//   usernameController.dispose();
+//   passwordController.dispose();
+//   super.onClose();
+// }
 }

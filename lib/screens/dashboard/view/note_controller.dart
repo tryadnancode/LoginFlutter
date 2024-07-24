@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:login/api/auth_repo_task.dart';
 import 'package:login/screens/dashboard/Data/response_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../routes/app_routes.dart';
 
 
 class NoteController extends GetxController {
@@ -16,7 +19,11 @@ class NoteController extends GetxController {
     fetchTasks();
     super.onInit();
   }
-
+  void logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Get.offAllNamed(AppRoutes.login);
+  }
   void fetchTasks() async {
     try {
       isLoading(true);
