@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/screens/dashboard/dialog/color_picker_dialog.dart';
-import 'package:login/screens/detail/dialog/UpdateNoteDialog.dart';
 import 'package:login/screens/detail/view/detail_controller.dart';
 
 class NotesDetails extends StatelessWidget {
@@ -21,46 +19,7 @@ class NotesDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: TextButton(
-              onPressed: () {
-                // Open color picker dialog or other actions
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return StatefulBuilder(
-                      builder: (BuildContext context, StateSetter setState) {
-                        return AlertDialog(
-                          actionsAlignment: MainAxisAlignment.start,
-                          title: const Text('Note Color Picker'),
-                          content: ColorPickerDialogContent(
-                            onColorSelected: (Color color) {
-                              setState(() {
-                                // Update the background color when a color is selected
-                                _selectedColor = color;
-                              });
-                            },
-                          ),
-                          backgroundColor: _selectedColor,
-                          // Use the selected color
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text('Cancel'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            TextButton(
-                              child: const Text('Share'),
-                              onPressed: () {
-                                // Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                );
-              },
+              onPressed: () => controller.showColorPickerDialog(context, _selectedColor),
               child: const Icon(Icons.color_lens),
             ),
           ),
@@ -75,7 +34,7 @@ class NotesDetails extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-               // Apply color to the container
+                // Apply color to the container
                 padding: const EdgeInsets.only(top: 16),
                 width: double.infinity,
                 margin: const EdgeInsets.only(
@@ -137,7 +96,7 @@ class NotesDetails extends StatelessWidget {
             Expanded(
               child: FloatingActionButton.extended(
                 onPressed: () {
-                  _updateNoteDialog(context, controller);
+                  controller.showUpdateNoteDialog(context);
                 },
                 label: const Text(
                   "Update Notes",
@@ -161,21 +120,6 @@ class NotesDetails extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
-  }
-
-  Future<void> _updateNoteDialog(BuildContext context, DetailController controller) async {
-    await showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return UpdateNoteDialog(
-          initialTitle: controller.listData.value.title ?? '',
-          initialDescription: controller.listData.value.description ?? '',
-          onUpdate: (title, description) {
-            controller.updateNote(title, description);
-          },
-        );
-      },
     );
   }
 }

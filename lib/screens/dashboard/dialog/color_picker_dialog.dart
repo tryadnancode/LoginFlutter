@@ -1,96 +1,106 @@
 import 'package:flutter/material.dart';
 
-class ColorPickerDialogContent extends StatefulWidget {
-  final Function(Color) onColorSelected;
+class ColorPickerDialog extends StatelessWidget {
+  final Color selectedColor;
+  final ValueChanged<Color> onColorSelected;
 
-  const ColorPickerDialogContent({super.key, required this.onColorSelected});
-
-  @override
-  _ColorPickerDialogContentState createState() => _ColorPickerDialogContentState();
-}
-
-class _ColorPickerDialogContentState extends State<ColorPickerDialogContent> {
-  Color _selectedColor = Colors.green; // Default color
-  bool _isPasswordEnabled = false;
-  bool _isReminderEnabled = false;
+  const ColorPickerDialog({
+    super.key,
+    required this.selectedColor,
+    required this.onColorSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    final List<Color> colors = [
+      Colors.red,
+      Colors.green,
+      Colors.blue,
+      Colors.yellow,
+      Colors.purple,
+      Colors.orange,
+      Colors.pink,
+      Colors.teal,
+      Colors.cyan,
+    ];
+
+    return Dialog(
+      insetPadding: const EdgeInsets.all(10),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Text(
-            'Select Note Color',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+          const Text('Note Color', style: TextStyle(fontSize: 18)),
+          const SizedBox(height: 10),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  spacing: 8.0,
+                  runSpacing: 8.0,
+                  children: colors.map((color) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop(color);
+                        onColorSelected(color);
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: color,
+                        radius: 16,
+                        // child: selectedColor == color
+                        //     ? const Icon(Icons.check, color: Colors.white)
+                        //     : null,
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 20),
+                SwitchListTile(
+                  title: const Text('Password'),
+                  value: false,
+                  onChanged: (bool value) {
+                    // Handle switch change if needed
+                  },
+                ),
+                SwitchListTile(
+                  title: const Text('Reminder'),
+                  value: false,
+                  onChanged: (bool value) {
+                    // Handle switch change if needed
+                  },
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 10),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: <Color>[
-              Colors.green,
-              Colors.red,
-              Colors.blue,
-              Colors.orange,
-              Colors.purple,
-              Colors.yellow,
-              Colors.pink,
-              Colors.grey
-            ].map((color) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _selectedColor = color;
-                  });
-                  widget.onColorSelected(color); // Notify parent of the selected color
-                },
-                child: Container(
-                  width: 40.0,
-                  height: 40.0,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                    border: _selectedColor == color
-                        ? Border.all(
-                      color: Colors.black,
-                      width: 3.0,
-                    )
-                        : null,
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-          const SizedBox(height: 20.0),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              const Text('Password'),
-              Switch(
-                value: _isPasswordEnabled,
-                onChanged: (value) {
-                  setState(() {
-                    _isPasswordEnabled = value;
-                  });
-                },
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Share'),
               ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Delete'),
+              ),
+              // ElevatedButton(
+              //   onPressed: () => Navigator.of(context).pop(selectedColor),
+              //   child: const Text('Save'),
+              // ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              const Text('Reminder'),
-              Switch(
-                value: _isReminderEnabled,
-                onChanged: (value) {
-                  setState(() {
-                    _isReminderEnabled = value;
-                  });
-                },
-              ),
-            ],
-          ),
+          const SizedBox(height: 10),
         ],
       ),
     );
