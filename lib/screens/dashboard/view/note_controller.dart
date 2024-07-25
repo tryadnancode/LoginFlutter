@@ -45,4 +45,14 @@ class NoteController extends GetxController {
       Get.snackbar('Error', 'Failed to create task');
     }
   }
+  void deleteTask(String id) async {
+    try {
+      await AuthRepoTask.deleteNotes(id);
+      allTasks.removeWhere((task) => task.id == id);
+      completedTasks.removeWhere((task) => task.id == id);
+      pendingTasks.removeWhere((task) => task.id == id);
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to delete task');
+    }
+  }
 }

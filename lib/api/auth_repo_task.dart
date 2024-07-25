@@ -26,14 +26,23 @@ class AuthRepoTask {
       throw Exception('Failed to create task');
     }
   }
-  Future<http.Response> delete(String id) async {
-    final http.Response response = await http.delete(
-      Uri.parse('https://jsonplaceholder.typicode.com/albums/$id'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+  static Future<void> deleteNotes(String id) async {
+    final response = await http.delete(Uri.parse('$url/$id'));
+    if (response.statusCode != 200) {
+      throw Exception('Failed to delete Notes');
+    }
+  }
+  static Future<void> updateNotes(String id, Map<String, dynamic> data) async {
+    final updateUrl = '$url/$id';
+    final response = await http.put(
+      Uri.parse(updateUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data),
     );
 
-    return response;
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update note');
+    }
   }
+
 }
