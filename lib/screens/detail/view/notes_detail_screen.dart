@@ -73,13 +73,16 @@ class NotesDetails extends StatelessWidget {
                     const SizedBox(height: 20),
                     Obx(() => Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        controller.listData.value.updatedAt.toDateTime()?.toDateString()??'',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          controller.listData.value.updatedAt.toDateTime()?.toDateString()??'',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     )),

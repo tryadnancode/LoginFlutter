@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:login/screens/dashBoard/view/note_controller.dart';
 import 'package:login/screens/dashboard/Data/response_data.dart';
 import 'package:login/utils/extensions.dart';

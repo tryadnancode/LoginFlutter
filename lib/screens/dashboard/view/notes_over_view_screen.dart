@@ -20,7 +20,7 @@ class NotesOverview extends StatelessWidget {
 
     Future<String> getProfileImageUrl() async {
       final prefs = await SharedPreferences.getInstance();
-      return prefs.getString('profileImageUrl') ?? 'assets/images/default_profile.png'; // Default image if not set
+      return prefs.getString('profileImageUrl') ?? 'assets/images/img.png'; // Default image if not set
     }
 
     return SafeArea(
