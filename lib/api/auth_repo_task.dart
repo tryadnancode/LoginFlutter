@@ -1,19 +1,21 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:login/api/ui_state.dart';
 import 'package:login/screens/dashboard/Data/response_data.dart';
 
 class AuthRepoTask {
   static const String url =
       'https://6690d550c0a7969efd9db690.mockapi.io/api/v1/tasks';
 
-  static Future<List<ResponseData>> fetchTask() async {
+  static void fetchTask(Function(UiState<List<ResponseData>>) callback) async {
+    callback.call(const Loading());
     final response = await http.get(Uri.parse(url));
-
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
-      return jsonResponse.map((task) => ResponseData.fromJson(task)).toList();
+      callback.call(Success(jsonResponse.map((task) => ResponseData.fromJson(task)).toList()));
     } else {
-      throw Exception('Failed to load tasks');
+      callback.call(const Error('Failed to load tasks'));
     }
   }
   static Future<void> createTask(String title, String description) async {

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:login/screens/dashBoard/view/note_controller.dart';
 import 'package:login/screens/dashboard/Data/response_data.dart';
+import 'package:login/utils/extentions.dart';
 
 class NoteCard extends StatelessWidget {
   final ResponseData task;
-
-  const NoteCard({super.key, required this.task});
-
-
-
+  final Function(ResponseData)? onDeleted;
+  const NoteCard({super.key, required this.task,   this.onDeleted});
   @override
   Widget build(BuildContext context) {
-    final NoteController noteController = Get.find();
     return Container(
       width: double.infinity,
       // height: 100,
@@ -33,13 +28,13 @@ class NoteCard extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 task.title.toString(),
-                style: const TextStyle(color: Colors.white, fontSize: 18),
+                style:   TextStyle(color: Theme.of(context).colorScheme.inverseSurface,fontWeight: FontWeight.w600, fontSize: 16),
               ),
               Align(
                 alignment: Alignment.topRight,
                 child: IconButton(
                     onPressed: () {
-                      noteController.deleteTask(task.id.toString());
+                      onDeleted?.call(task);
                     },
                     icon: const Icon(Icons.delete)),
               ),
@@ -50,24 +45,13 @@ class NoteCard extends StatelessWidget {
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             task.description.toString(),
-            style: const TextStyle(color: Colors.white, fontSize: 14),
+            style:   TextStyle(color: Theme.of(context).colorScheme.inverseSurface, fontSize: 14),
           ),
           const SizedBox(height: 8),
-          const Row(
-            children: [
-              Text(
-                "yesterday",
-                style: TextStyle(color: Colors.white, fontSize: 12),
-              ),
-              SizedBox(width: 8),
-              Text(
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                '12 pm',
-                style: TextStyle(color: Colors.blue, fontSize: 14),
-              ),
-            ],
-          ),
+            Text(
+              task.updatedAt?.toDateTime()?.toDateString()??'',
+              style: const TextStyle(  fontSize: 12),
+            ),
         ],
       ),
     );

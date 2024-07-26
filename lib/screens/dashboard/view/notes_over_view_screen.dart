@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:login/routes/app_routes.dart';
 import 'package:login/screens/dashBoard/dialog/create_dialog.dart';
 import 'package:login/screens/dashBoard/view/note_controller.dart';
-import 'package:login/screens/login/view/login_controller.dart';
 import 'package:login/widgets/note_card.dart';
 
 class NotesOverView extends StatelessWidget {

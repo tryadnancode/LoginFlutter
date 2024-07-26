@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login/screens/detail/view/detail_controller.dart';
+import 'package:login/utils/extentions.dart';
 
 class NotesDetails extends StatelessWidget {
   const NotesDetails({super.key});
@@ -73,7 +74,7 @@ class NotesDetails extends StatelessWidget {
                     Obx(() => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        '${controller.listData.value.updatedAt}',
+                        controller.listData.value.updatedAt.toDateTime()?.toDateString()??'',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 12,
