@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login/screens/detail/view/detail_controller.dart';
-import 'package:login/utils/extentions.dart';
+import 'package:login/utils/extensions.dart';
 
 class NotesDetails extends StatelessWidget {
   const NotesDetails({super.key});

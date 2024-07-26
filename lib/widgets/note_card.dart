@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/screens/dashboard/Data/response_data.dart';
-import 'package:login/utils/extentions.dart';
+import 'package:login/utils/extensions.dart';
 
 class NoteCard extends StatelessWidget {
   final ResponseData task;

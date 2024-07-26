@@ -25,9 +25,9 @@ class LoginController extends GetxController {
           (data, error) {
         isLoading.value = false;
         if (error == null) {
-          saveLoginData(data!!);
+          saveLoginData(data!);
         } else {
-          _showErrorDialog(error!!);
+          _showErrorDialog(error);
         }
       });
     } else {
@@ -41,6 +41,8 @@ class LoginController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', response.token ?? '');
     await prefs.setString('username', response.email ?? '');
+    await prefs.setString('profileImageUrl', response.image ?? '');
+
     Get.offAndToNamed(AppRoutes.overView);
 
   }
