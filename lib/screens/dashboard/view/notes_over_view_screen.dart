@@ -81,9 +81,9 @@ class NotesOverview extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.search_rounded),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(Icons.search_rounded),
                         ),
                         Expanded(
                           child: TextField(

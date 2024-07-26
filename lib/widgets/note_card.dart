@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:login/screens/dashBoard/view/note_controller.dart';
 import 'package:login/screens/dashboard/Data/response_data.dart';
 import 'package:login/utils/extensions.dart';
 
@@ -8,6 +11,7 @@ class NoteCard extends StatelessWidget {
   const NoteCard({super.key, required this.task,   this.onDeleted});
   @override
   Widget build(BuildContext context) {
+    final NoteController noteController = Get.find();
     return Container(
       width: double.infinity,
       // height: 100,
@@ -34,7 +38,9 @@ class NoteCard extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: IconButton(
                     onPressed: () {
-                      onDeleted?.call(task);
+                      noteController.deleteTask(task.id.toString());
+
+                     // onDeleted?.call(task);
                     },
                     icon: const Icon(Icons.delete)),
               ),
