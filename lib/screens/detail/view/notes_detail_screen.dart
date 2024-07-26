@@ -53,7 +53,7 @@ class NotesDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.deepOrange,
+                        color: Colors.black,
                       ),
                     )),
                     const Divider(color: Colors.black, thickness: 2),
@@ -79,7 +79,7 @@ class NotesDetails extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Colors.blueAccent,
+                          color: Colors.black,
                         ),
                       ),
                     )),
@@ -100,7 +100,7 @@ class NotesDetails extends StatelessWidget {
                   controller.showUpdateNoteDialog(context);
                 },
                 label: const Text(
-                  "Update Notes",
+                  "Edit Notes",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

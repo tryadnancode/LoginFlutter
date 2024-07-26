@@ -36,6 +36,7 @@ class CreateNotesDialog extends StatelessWidget {
             decoration: const InputDecoration(labelText: 'Title'),
           ),
           TextField(
+            maxLines: 5,
             controller: _descriptionController,
             decoration: const InputDecoration(labelText: 'Description'),
           ),
