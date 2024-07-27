@@ -5,13 +5,12 @@ import 'package:login/routes/app_routes.dart';
 import 'package:login/screens/login/view/login_controller.dart';
 
 class Login extends StatelessWidget {
-   Login({super.key});
-  final LoginController _loginController = Get.put(LoginController());
+  Login({super.key});
 
+  final LoginController _loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login as Student"),
@@ -43,7 +42,7 @@ class Login extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Obx(
-                      () => TextFormField(
+                  () => TextFormField(
                     controller: _loginController.passwordController,
                     decoration: InputDecoration(
                       labelText: 'Enter Password',
@@ -57,7 +56,7 @@ class Login extends StatelessWidget {
                         ),
                         onPressed: () {
                           _loginController.isPasswordVisible.value =
-                          !_loginController.isPasswordVisible.value;
+                              !_loginController.isPasswordVisible.value;
                         },
                       ),
                     ),
@@ -79,7 +78,7 @@ class Login extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Obx(
-                      () => Container(
+                  () => Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -90,18 +89,15 @@ class Login extends StatelessWidget {
                           ? null
                           : _loginController.login,
                       child: _loginController.isLoading.value
-                          ? const CircularProgressIndicator(
-
-
-                      )
+                          ? const CircularProgressIndicator()
                           : const Text(
-                        "Login",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
+                              "Login",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
                     ),
                   ),
                 ),
@@ -117,7 +113,7 @@ class Login extends StatelessWidget {
                     Align(
                       child: TextButton(
                         onPressed: () {
-                         Get.toNamed(AppRoutes.signup);
+                          Get.toNamed(AppRoutes.signup);
                         },
                         child: const Text("Register here"),
                       ),

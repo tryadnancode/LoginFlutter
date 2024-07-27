@@ -27,11 +27,13 @@ class NoteCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                task.title.toString(),
-                style:   TextStyle(color: Theme.of(context).colorScheme.inverseSurface,fontWeight: FontWeight.w600, fontSize: 16),
+              Expanded(
+                child: Text(
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  task.title.toString(),
+                  style:   TextStyle(color: Theme.of(context).colorScheme.inverseSurface,fontWeight: FontWeight.w600, fontSize: 16),
+                ),
               ),
               Align(
                 alignment: Alignment.topRight,
@@ -39,7 +41,6 @@ class NoteCard extends StatelessWidget {
                     onPressed: () {
                       noteController.deleteTask(task.id.toString());
 
-                     // onDeleted?.call(task);
                     },
                     icon: const Icon(Icons.delete)),
               ),
