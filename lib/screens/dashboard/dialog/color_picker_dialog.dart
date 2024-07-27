@@ -4,52 +4,38 @@ class ColorPickerDialog extends StatelessWidget {
   final Color selectedColor;
   final ValueChanged<Color> onColorSelected;
 
-  const ColorPickerDialog({
+   ColorPickerDialog({
     super.key,
     required this.selectedColor,
     required this.onColorSelected,
   });
-
+  final List<Color> colors = [
+    Colors.green,
+    Colors.blue,
+    Colors.yellow,
+    Colors.purple,
+    Colors.orange,
+    Colors.teal,
+    Colors.cyan,
+    const Color(0xFFFFCDD2),
+    const Color(0xFFAD1457),
+    const Color(0xFFCE93D8),
+  ];
   @override
   Widget build(BuildContext context) {
-    final List<Color> colors = [
-      Colors.green,
-      Colors.blue,
-      Colors.yellow,
-      Colors.purple,
-      Colors.orange,
-      Colors.teal,
-      Colors.cyan,
-      const Color(0xFFFFCDD2),
-      const Color(0xFFAD1457),
-      const Color(0xFFCE93D8),
-    ];
-
-    return Builder(
-      builder: (context) {
         return Stack(
           children: [
             Positioned(
-
-              left: 25,
-              child: Dialog(
-                backgroundColor: Colors.white,
-                //insetPadding: const EdgeInsets.all(10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: SizedBox(
-                 width: 150,
+              right: 10,
+              top: 10,
+              child: Material(
+               type: MaterialType.transparency,
+                child: Container(
+                 width: 250,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),   color: Colors.white),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Align(
-                      //   alignment: Alignment.topRight,
-                      //   child: IconButton(
-                      //     icon: const Icon(Icons.close),
-                      //     onPressed: () => Navigator.of(context).pop(),
-                      //   ),
-                      // ),
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text('Note Color', style: TextStyle(fontSize: 18,color: Colors.black)),
@@ -60,8 +46,6 @@ class ColorPickerDialog extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Wrap(
-                              // spacing: 4.0,
-                              // runSpacing: 4.0,
                               children: colors.map((color) {
                                 return GestureDetector(
                                   onTap: () {
@@ -73,9 +57,6 @@ class ColorPickerDialog extends StatelessWidget {
                                     child: CircleAvatar(
                                       backgroundColor: color,
                                       radius: 16,
-                                      // child: selectedColor == color
-                                      //     ? const Icon(Icons.check, color: Colors.white)
-                                      //     : null,
                                     ),
                                   ),
                                 );
@@ -113,10 +94,6 @@ class ColorPickerDialog extends StatelessWidget {
                             onPressed: () => Navigator.of(context).pop(),
                             child: const Text('Cancel',style: TextStyle(color: Colors.black),),
                           ),
-                          // ElevatedButton(
-                          //   onPressed: () => Navigator.of(context).pop(selectedColor),
-                          //   child: const Text('Save'),
-                          // ),
                         ],
                       ),
                       const SizedBox(height: 10),
@@ -127,7 +104,5 @@ class ColorPickerDialog extends StatelessWidget {
             ),
           ],
         );
-      }
-    );
   }
 }

@@ -20,7 +20,10 @@ class NotesDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: TextButton(
-              onPressed: () => controller.showColorPickerDialog(context, _selectedColor),
+              onPressed: () { controller.showColorPickerDialog(context, _selectedColor);
+
+                },
+
               child: const Icon(Icons.color_lens),
             ),
           ),
@@ -42,7 +45,7 @@ class NotesDetails extends StatelessWidget {
                     top: 16, bottom: 100, left: 16, right: 16),
                 decoration: BoxDecoration(
                   color: color,
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
                   border: Border.all(width: 2, color: Colors.black),
                 ),
                 child: Column(
@@ -127,5 +130,4 @@ class NotesDetails extends StatelessWidget {
     );
   }
 }
-
 Color _selectedColor = Colors.green;

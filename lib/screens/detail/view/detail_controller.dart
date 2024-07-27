@@ -89,6 +89,7 @@ class DetailController extends GetxController {
           },
         );
       },
+      barrierDismissible: true,
     ).then((selectedColor) {
       if (selectedColor != null) {
         updateColor(selectedColor);
