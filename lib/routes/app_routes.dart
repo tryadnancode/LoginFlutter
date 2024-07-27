@@ -5,4 +5,5 @@ class AppRoutes{
   static const overView = "/overView";
   static const details = "/details";
   static const splash = '/splash';
+  static const viewAll = '/viewAll';
 }
