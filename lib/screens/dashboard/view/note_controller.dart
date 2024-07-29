@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:login/api/auth_repo_task.dart';
 import 'package:login/api/ui_state.dart';
 import 'package:login/screens/dashboard/Data/response_data.dart';
@@ -7,12 +10,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../routes/app_routes.dart';
 
 class NoteController extends GetxController {
-  var allTasks = <ResponseData>[].obs;
-  var completedTasks = <ResponseData>[].obs;
+  Rx<UiState<List<ResponseData>>> allTasks =   Rx<UiState<List<ResponseData>>>(const None());
+ // Rx<UiState<List<ResponseData>>> allTasks =   const None<List<ResponseData>>().obs;
+  RxList<ResponseData> completedTasks = <ResponseData>[].obs;
   var pendingTasks = <ResponseData>[].obs;
   var filteredTasks = <ResponseData>[].obs;
   var searchQuery = ''.obs;
-  var isLoading = true.obs;
+ // var isLoading = true.obs;
   var loginResponse = ResponseData(title: '', description: '').obs;
 
   static NoteController get to => Get.find();
@@ -31,26 +35,27 @@ class NoteController extends GetxController {
 
   void fetchTasks() async {
     AuthRepoTask.fetchTask((state) {
-      handleState(state);
+      allTasks.value=state;
+      debugPrint("===============> $state");
     });
   }
 
   void handleState(UiState<List<ResponseData>> state) {
     if (state is Success) {
-      isLoading(false);
+     // isLoading(false);
       List<ResponseData> tasks = (state as Success).data;
-      allTasks.assignAll(tasks);
+
       filteredTasks.assignAll(tasks); // Initially show all tasks
       completedTasks.assignAll(
           tasks.where((task) => task.isCompleted ?? false).toList());
       pendingTasks.assignAll(
           tasks.where((task) => task.pinned ?? false).toList());
     } else if (state is Error) {
-      isLoading(false);
+    //  isLoading(false);
       var error = (state as Error).msg;
       Get.snackbar('Error', error);
     } else if (state is Loading) {
-      isLoading(true);
+     // isLoading(true);
     }
   }
 
@@ -64,7 +69,7 @@ class NoteController extends GetxController {
   }
 
   void deleteTask(String id) async {
-    try {
+   /* try {
       await AuthRepoTask.deleteNotes(id);
       allTasks.removeWhere((task) => task.id == id);
       completedTasks.removeWhere((task) => task.id == id);
@@ -72,7 +77,7 @@ class NoteController extends GetxController {
       filterTasks();
     } catch (e) {
       Get.snackbar('Error', 'Failed to delete task');
-    }
+    }*/
   }
 
   void updateSearchQuery(String query) {
@@ -81,13 +86,13 @@ class NoteController extends GetxController {
   }
 
   void filterTasks() {
-    if (searchQuery.isEmpty) {
+  /*  if (searchQuery.isEmpty) {
       filteredTasks.assignAll(allTasks);
     } else {
       filteredTasks.assignAll(
           allTasks.where((task) =>
           (task.title?.contains(searchQuery.value) ?? false) ||
               (task.description?.contains(searchQuery.value) ?? false)).toList());
-    }
+    }*/
   }
 }

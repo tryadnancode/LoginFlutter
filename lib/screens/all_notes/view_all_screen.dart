@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login/screens/all_notes/view_all_controller.dart';
-import 'package:login/widgets/note_card.dart';
 import 'package:login/routes/app_routes.dart';
 import 'package:login/widgets/view_all_card.dart';
 
@@ -27,7 +26,6 @@ class ViewAllScreen extends StatelessWidget {
           if (viewAllController.isError.value) {
             return Center(child: Text('Error: ${viewAllController.errorMessage.value}'));
           }
-
           return NotificationListener<ScrollNotification>(
             onNotification: (scrollInfo) {
               if (!viewAllController.isLoading.value &&
