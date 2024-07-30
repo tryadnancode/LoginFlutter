@@ -1,11 +1,11 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:login/auth/login/view/login_screen.dart';
+import 'package:login/auth/signup/view/sign_up_screen.dart';
 import 'package:login/routes/app_routes.dart';
-import 'package:login/screens/all_notes/view_all_screen.dart';
-import 'package:login/screens/dashboard/view/notes_over_view_screen.dart';
-import 'package:login/screens/detail/view/notes_detail_screen.dart';
-import 'package:login/screens/login/view/login_screen.dart';
-import 'package:login/screens/signup/view/sign_up_screen.dart';
-import 'package:login/screens/splash/splash_screen.dart';
+import 'package:login/screen/all_notes/view_all_screen.dart';
+import 'package:login/screen/dashboard/view/notes_over_view_screen.dart';
+import 'package:login/screen/detail/view/notes_detail_screen.dart';
+import 'package:login/screen/splash/splash_screen.dart';
 
 class AppPages{
   static final List<GetPage> pages = [

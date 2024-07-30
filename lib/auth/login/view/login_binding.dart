@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:login/screens/login/view/login_controller.dart';
+import 'package:login/auth/login/view/login_controller.dart';
 
 
 class LoginBinding extends Bindings {

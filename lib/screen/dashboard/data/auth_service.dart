@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:login/auth/data/login_response.dart';
 
-import '../../login/data/login_response.dart';
 
 class AuthService {
   final String baseUrl = 'https://dummyjson.com';

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/screens/all_notes/view_all_controller.dart';
+import 'package:login/screen/all_notes/view_all_controller.dart';
 import 'package:login/routes/app_routes.dart';
 import 'package:login/widgets/view_all_card.dart';
 

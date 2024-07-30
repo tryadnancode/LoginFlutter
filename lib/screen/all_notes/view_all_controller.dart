@@ -1,8 +1,8 @@
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:login/screen/dashboard/data/response_data.dart';
 import 'dart:convert';
-import 'package:login/screens/dashboard/Data/response_data.dart';
 import 'package:login/api/ui_state.dart';
 
 class ViewAllController extends GetxController {

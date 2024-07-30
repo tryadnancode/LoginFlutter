@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/screens/dashBoard/view/note_controller.dart';
+import 'package:login/screen/dashboard/view/note_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateNotesDialog extends StatelessWidget {
   final TextEditingController _titleController = TextEditingController();
@@ -9,9 +10,14 @@ class CreateNotesDialog extends StatelessWidget {
 
   CreateNotesDialog({super.key});
 
+  Future<String> _getUserId(String s) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('username') ?? '';
+  }
   void _createTask() async {
     final title = _titleController.text;
     final description = _descriptionController.text;
+    final userid = await _getUserId('username') ?? '';
 
     if (title.isEmpty || description.isEmpty) {
       Get.snackbar('Error', 'Please fill in all fields');

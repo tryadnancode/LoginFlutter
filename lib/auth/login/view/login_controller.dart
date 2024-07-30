@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:login/auth/data/login_response.dart';
 import 'package:login/routes/app_routes.dart';
-import 'package:login/screens/dashBoard/Data/auth_service.dart';
-import 'package:login/screens/login/data/login_response.dart';
+import 'package:login/screen/dashboard/data/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
@@ -25,7 +25,7 @@ class LoginController extends GetxController {
           (data, error) {
         isLoading.value = false;
         if (error == null) {
-          saveLoginData(data!);
+          saveLoginData(data as LoginResponse);
         } else {
           _showErrorDialog(error);
         }

@@ -1,10 +1,10 @@
 
 import 'package:get/get.dart';
 import 'package:login/api/auth_repo_task.dart';
-import 'package:login/screens/dashboard/Data/response_data.dart';
+import 'package:login/screen/dashboard/data/response_data.dart';
+import 'package:login/screen/dashboard/dialog/color_picker_dialog.dart';
+import 'package:login/screen/detail/dialog/update_noted_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:login/screens/dashboard/dialog/color_picker_dialog.dart';
-import 'package:login/screens/detail/dialog/update_noted_dialog.dart';
 
 class DetailController extends GetxController {
   static DetailController get to => Get.find();

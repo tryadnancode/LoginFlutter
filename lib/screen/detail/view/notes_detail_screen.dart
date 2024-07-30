@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/screens/detail/view/detail_controller.dart';
+import 'package:login/screen/detail/view/detail_controller.dart';
 import 'package:login/utils/extensions.dart';
 
 class NotesDetails extends StatelessWidget {
@@ -51,14 +51,14 @@ class NotesDetails extends StatelessWidget {
                 child: Column(
                   children: [
                     Obx(() => Text(
-                          '${controller.listData.value.title}',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        )),
+                      '${controller.listData.value.title}',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    )),
                     const Divider(color: Colors.black, thickness: 2),
                     const SizedBox(height: 20),
                     Expanded(
@@ -67,36 +67,36 @@ class NotesDetails extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Obx(() => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    '${controller.listData.value.description}',
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                )),
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '${controller.listData.value.description}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            )),
                             const SizedBox(height: 20),
                             Obx(() => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Text(
-                                      controller.listData.value.updatedAt
-                                              .toDateTime()
-                                              ?.toDateString() ??
-                                          '',
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      ),
-                                    ),
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  controller.listData.value.updatedAt
+                                      .toDateTime()
+                                      ?.toDateString() ??
+                                      '',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
                                   ),
-                                )),
+                                ),
+                              ),
+                            )),
                           ],
                         ),
                       ),
