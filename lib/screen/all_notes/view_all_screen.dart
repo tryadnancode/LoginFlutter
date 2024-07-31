@@ -20,28 +20,31 @@ class ViewAllScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Icon(Icons.search_rounded),
-                ),
-                Expanded(
-                  child: TextField(
-                    onChanged: (value) {
-                      viewAllController.updateSearchQuery(value);
-                    },
-                    onSubmitted: (value) async {
-                      await viewAllController.executeSearch();
-                    },
-                    textInputAction: TextInputAction.search,
-                    decoration: const InputDecoration(
-                      hintText: "Search your notes...",
-                      border: InputBorder.none,
+            Container(
+              color: Colors.black12,
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Icon(Icons.search_rounded),
+                  ),
+                  Expanded(
+                    child: TextField(
+                      onChanged: (value) {
+                        viewAllController.updateSearchQuery(value);
+                      },
+                      onSubmitted: (value) async {
+                        await viewAllController.executeSearch();
+                      },
+                      textInputAction: TextInputAction.search,
+                      decoration: const InputDecoration(
+                        hintText: "Search your notes...",
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Expanded(
               child: Obx(() {
