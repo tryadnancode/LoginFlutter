@@ -84,23 +84,24 @@ class NotesOverview extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(Icons.search_rounded),
-                        ),
                         Expanded(
-                          child: TextField(
-                            onChanged: (value) {
-                              taskController.updateSearchQuery(value);
+                          child: TextButton(
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.viewAll);
                             },
-                            decoration: const InputDecoration(
-                              hintText: "Search your notes.....",
-                              border: InputBorder.none,
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(Icons.search),
+                                SizedBox(width: 8), // Optional: Add some space between the icon and text
+                                Text("Search your notes...."),
+                              ],
                             ),
                           ),
                         ),
                       ],
-                    ),
+                    )
+
                   ),
                   Expanded(
                     child: RefreshIndicator(
@@ -110,8 +111,6 @@ class NotesOverview extends StatelessWidget {
                           SliverToBoxAdapter(
                             child: Obx(() {
                               if (taskController.allTasks.value is Success) {
-                                List<ResponseData> tasks =
-                                    (taskController.allTasks.value as Success).data;
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -150,7 +149,7 @@ class NotesOverview extends StatelessWidget {
                             if (taskController.allTasks.value is Success) {
                               List<ResponseData> tasks =
                                   (taskController.allTasks.value as Success).data;
-                              return SliverGrid(
+                             return SliverGrid(
                                 gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,

@@ -124,20 +124,24 @@ class NoteController extends GetxController {
   void fetchTasks() async {
     AuthRepoTask.fetchTask((state) {
       allTasks.value = state;
-      handleState(state); // Call handleState here
+      handleState(state,(List<ResponseData> tasks){
+        filteredTasks.assignAll(tasks); // Initially show all tasks
+        completedTasks.value =
+            Success(tasks.where((task) => task.isCompleted ?? false).toList());
+        pendingTasks.value =
+            Success(tasks.where((task) => task.pinned ?? false).toList());
+      }); // Call handleState here
     });
   }
 
-  void handleState(UiState<List<ResponseData>> state) {
+  void handleState<T>(UiState<T> state,Function(T) onSuccess,
+      {Function(String)? onError}) {
     if (state is Success) {
-      List<ResponseData> tasks = (state as Success).data;
-      filteredTasks.assignAll(tasks); // Initially show all tasks
-      completedTasks.value =
-          Success(tasks.where((task) => task.isCompleted ?? false).toList());
-      pendingTasks.value =
-          Success(tasks.where((task) => task.pinned ?? false).toList());
+      T tasks = (state as Success).data;
+      onSuccess.call(tasks);
     } else if (state is Error) {
       var error = (state as Error).msg;
+      onError?.call(error);
       Get.snackbar('Error', error);
     }
   }
@@ -151,9 +155,6 @@ class NoteController extends GetxController {
     }
   }
 
-  // void deleteTask(String id) async {
-  //   // Implement delete logic
-  // }
   Future<void> deleteTask(String id) async {
     try {
       await AuthRepoTask.deleteNotes(id);
@@ -163,14 +164,6 @@ class NoteController extends GetxController {
     }
   }
 
-  void updateSearchQuery(String query) {
-    searchQuery.value = query;
-    filterTasks();
-  }
-
-  void filterTasks() {
-    // Implement filter logic
-  }
 }
 
 // class NoteController extends GetxController {

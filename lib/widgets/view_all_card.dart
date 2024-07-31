@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:login/screen/dashboard/data/response_data.dart';
-import 'package:login/screen/dashboard/view/note_controller.dart';
 import 'package:login/utils/extensions.dart';
 
 class ViewAllCard extends StatelessWidget {
@@ -10,7 +8,7 @@ class ViewAllCard extends StatelessWidget {
   const ViewAllCard({super.key, required this.task,   this.onDeleted});
   @override
   Widget build(BuildContext context) {
-    final NoteController noteController = Get.find();
+  //  final NoteController noteController = Get.find();
     return Padding(
       padding: const EdgeInsets.only(left: 16,right: 16,top: 4,bottom: 4),
       child: Container(

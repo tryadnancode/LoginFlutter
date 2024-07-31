@@ -11,6 +11,37 @@ class NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final NoteController noteController = Get.find();
+
+    void confirmDelete() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Confirm Delete'),
+            content: const Text('Are you sure you want to delete this task?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  noteController.deleteTask(task.id.toString());
+                  Navigator.of(context).pop(); // Close the dialog
+                  if (onDeleted != null) {
+                    onDeleted!(task);
+                  }
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Container(
       width: double.infinity,
       // height: 100,
@@ -39,8 +70,7 @@ class NoteCard extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: IconButton(
                     onPressed: () {
-                      noteController.deleteTask(task.id.toString());
-
+                      confirmDelete();
                     },
                     icon: const Icon(Icons.delete)),
               ),
